@@ -127,7 +127,7 @@ all:
       extQuatStdDev: 0.5e-1
     kalman:
       # Optimized for mocap-based flight
-      pNAcc_xy: 0.5 # default 1.0 - trust mocap more for XY position
+      pNAcc_xy: 0.5
       pNAcc_z: 1.0  # default 1.0 - keep default for Z (barometer fusion)
       initialX: 0.0
       initialY: 0.0
@@ -139,5 +139,5 @@ all:
   # robots/drone_name to set per drone)
   reference_frame: "world"
   broadcasts:
-    num_repeats: 30 # increased from 20 to improve cf2 reception (was 54-69%)
-    delay_between_repeats_ms: 2 # increased from 1 ms to reduce radio congestion
+    num_repeats: 15
+    delay_between_repeats_ms: 1 # increased from 1 ms to reduce radio congestion
