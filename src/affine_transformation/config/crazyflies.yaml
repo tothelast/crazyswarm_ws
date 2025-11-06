@@ -1,0 +1,143 @@
+# named list of all robots
+fileversion: 3
+
+robots:
+  cf1:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E701
+    initial_position: [0.0, 0.0, 0.0]
+    type: cf21  # see robot_types
+
+  cf2:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E702
+    initial_position: [1.0, 0.0, 0.0]  
+    type: cf21  # see robot_types
+
+  cf3:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E703
+    initial_position: [0.25, 0.5, 0.0]  
+    type: cf21
+    
+  cf4:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E704
+    initial_position: [0.75, 0.5, 0.0]  
+    type: cf21 
+    
+  cf5:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E705
+    initial_position: [0.5, 1.0, 0.0]  
+    type: cf21 
+    
+  cf6:
+    enabled: true
+    uri: radio://0/120/2M/E7E7E7E706
+    initial_position: [0.5, 1.5, 0.0]
+    type: cf21
+
+
+# Definition of the various robot types
+robot_types:
+  cf21:
+    motion_capture:
+      tracking: "librigidbodytracker" # one of "vendor", "librigidbodytracker"
+      # only if enabled; see motion_capture.yaml
+      marker: default_single_marker
+      dynamics: default
+    big_quad: false
+    battery:
+      voltage_warning: 3.8  # V
+      voltage_critical: 3.7 # V
+    # firmware_params:
+    #   kalman:
+    #     pNAcc_xy: 1.0 # default 0.5
+    #firmware_logging:
+    #   enabled: true
+    #   default_topics:
+    #   pose:
+    #     frequency: 1 # Hz
+    #   custom_topics:
+    #    topic_name3: 
+    #      frequency: 1
+    #      vars: ["acc.x", "acc.y", "acc.z"]
+    # reference_frame: "odom" 
+
+  # cf21_mocap_deck:
+  #   motion_capture:
+  #     tracking: "librigidbodytracker" # one of "vendor", "librigidbodytracker"
+  #     # only if enabled; see motion_capture.yaml
+  #     marker: default_single_marker
+  #     dynamics: default
+  #   big_quad: false
+  #   battery:
+  #     voltage_warning: 3.8  # V
+  #     voltage_critical: 3.7 # V
+    # firmware_params:
+    #   kalman:
+    #     pNAcc_xy: 1.0 # default 0.5
+    #firmware_logging:
+    #   enabled: true
+    #   default_topics:
+    #   pose:
+    #     frequency: 1 # Hz
+    #   custom_topics:
+    #    topic_name3: 
+    #      frequency: 1
+    #      vars: ["acc.x", "acc.y", "acc.z"]
+    # reference_frame: "mocap" 
+
+# global settings for all robots
+all:
+  # firmware logging for all drones (use robot_types/type_name to set per type, or
+  # robots/drone_name to set per drone)
+  firmware_logging:
+    enabled: true
+    default_topics:
+     # remove to disable default topic
+      pose:
+        frequency: 5 # Hz (reduced from 10 Hz to save bandwidth - you have mocap at 100 Hz)
+      status:
+        frequency: 1 # Hz
+    #custom_topics:
+    #  topic_name1:
+    #    frequency: 10 # Hz
+    #    vars: ["stateEstimateZ.x", "stateEstimateZ.y", "stateEstimateZ.z", "pm.vbat"]
+    #  topic_name2:
+    #    frequency: 1 # Hz
+    #    vars: ["stabilizer.roll", "stabilizer.pitch", "stabilizer.yaw"]
+  # firmware parameters for all drones (use robot_types/type_name to set per type, or
+  # robots/drone_name to set per drone)
+  firmware_params:
+    commander:
+      enHighLevel: 1
+    stabilizer:
+      estimator: 2 # 1: complementary, 2: kalman
+      controller: 2 # 1: PID, 2: mellinger
+    # ring:
+    #   effect: 16 # 6: double spinner, 7: solid color, 16: packetRate
+    #   solidBlue: 255 # if set to solid color
+    #   solidGreen: 0 # if set to solid color
+    #   solidRed: 0 # if set to solid color
+    #   headlightEnable: 0
+    locSrv:
+      extPosStdDev: 1e-3
+      extQuatStdDev: 0.5e-1
+    kalman:
+      # Optimized for mocap-based flight
+      pNAcc_xy: 0.5 # default 1.0 - trust mocap more for XY position
+      pNAcc_z: 1.0  # default 1.0 - keep default for Z (barometer fusion)
+      initialX: 0.0
+      initialY: 0.0
+      initialZ: 0.0
+    # Uncomment to enable collision avoidance for multi-drone operations
+    # colAv:
+    #   enable: 1
+  # reference frame for on-board state-estimate of all drones (use robot_types/type_name to set per type, or
+  # robots/drone_name to set per drone)
+  reference_frame: "world"
+  broadcasts:
+    num_repeats: 30 # increased from 20 to improve cf2 reception (was 54-69%)
+    delay_between_repeats_ms: 2 # increased from 1 ms to reduce radio congestion
