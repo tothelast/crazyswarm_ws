@@ -59,7 +59,7 @@ def main():
         follower_weights[follower_name] = weights
 
     # Define Affine Transformation Modes for Leaders
-    rate_hz = 100
+    rate_hz = 50
     dt = 1.0 / rate_hz
     TAKEOFF_HEIGHT = 1.0
 
