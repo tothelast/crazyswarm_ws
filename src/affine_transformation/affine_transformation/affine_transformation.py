@@ -29,9 +29,9 @@ def main():
 
     # Define the neighbor topology for each follower
     follower_neighbors_map = {
-        'cf3': ['cf1', 'cf2', 'cf5'],
-        'cf4': ['cf2', 'cf5', 'cf6'],
-        'cf5': ['cf1', 'cf2', 'cf6']
+        'cf3': ['cf1', 'cf4', 'cf5'],  
+        'cf4': ['cf2', 'cf3', 'cf5'],  
+        'cf5': ['cf3', 'cf4', 'cf6']  
     }
 
     # Main leaders defining the overall transformation
