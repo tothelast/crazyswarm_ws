@@ -2,6 +2,7 @@ import csv
 import numpy as np
 from collections import defaultdict
 
+# Choose the CSV file to analyze 
 filename = 'logs/experiment_data_20251202_163931.csv'
 
 leaders = ['cf1', 'cf2', 'cf6']

@@ -2,6 +2,7 @@ from collections import defaultdict
 import csv
 import numpy as np
 
+# Choose the CSV file to analyze 
 filename = 'logs/experiment_data_20251202_163931.csv'
 
 data = defaultdict(lambda: {'des': [], 'act': []})
