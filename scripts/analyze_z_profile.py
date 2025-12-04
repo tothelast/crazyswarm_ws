@@ -2,7 +2,7 @@ import csv
 import numpy as np
 from collections import defaultdict
 
-filename = 'logs/experiment_data_20251202_153858.csv'
+filename = 'logs/experiment_data_20251202_163931.csv'
 
 leaders = ['cf1', 'cf2', 'cf6']
 followers = ['cf3', 'cf4', 'cf5']

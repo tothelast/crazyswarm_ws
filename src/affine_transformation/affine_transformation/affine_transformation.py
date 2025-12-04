@@ -63,7 +63,7 @@ def main():
     # Define Affine Transformation Modes for Leaders
     rate_hz = 50
     dt = 1.0 / rate_hz
-    TAKEOFF_HEIGHT = 1.0
+    TAKEOFF_HEIGHT = 0.75
 
     # Parameters for the transformation
     mode_params = {
@@ -74,7 +74,7 @@ def main():
         'D1': [0.0, 0.0, 2.0, 2.0],
         'D2': [0.0, 0.0, 0.0, 0.0],
         'D3': [0.0, 0.0, 0.0, 0.0],
-        'T':  [20.0, 20.0, 20.0]
+        'T':  [5.0, 20.0, 5.0]
     }
 
     logger.info("Generating leader trajectories...")
